@@ -12,7 +12,7 @@
     <% } %> 
 
     <% if (request.getParameter("excluido") != null) { %>  
-    <div class="alert alert-    " role="alert">
+    <div class="alert alert-danger" role="alert">
         Orientação <strong>excluido</strong> com sucesso!
     </div>
     <% } %> 

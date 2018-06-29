@@ -44,7 +44,7 @@ public class ProfessorREST extends HttpServlet {
             dao.inserir(professor);
             response.getWriter().write(gson.toJson(new Sucesso("Professor inserido com sucesso!")));
         } else {
-            response.getWriter().write(gson.toJson(new Erro("O atributo 'nome' é obrigatório")));
+            response.getWriter().write(gson.toJson(new Erro("O atributo 'nome' é obrigatório")));//em json
         }
     }
 
