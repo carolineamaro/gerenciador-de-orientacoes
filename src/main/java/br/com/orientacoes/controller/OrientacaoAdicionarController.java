@@ -21,10 +21,6 @@ public class OrientacaoAdicionarController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getSession().getAttribute("usuario") == null) {
-            response.sendRedirect("login");
-            return;
-        }
         request.setAttribute("professores", new ProfessorDAO().listar());
         request.getRequestDispatcher("adicionar-orientacao.jsp").forward(request, response);
     }

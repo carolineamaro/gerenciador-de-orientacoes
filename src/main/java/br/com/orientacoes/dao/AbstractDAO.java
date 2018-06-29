@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  *
  * @author Caroline
  */
-public abstract class AbstractDAO<T> {
+public abstract class AbstractDAO<T> /* T = Tipo genérico */ {
 
     protected Conexao conexao;
     protected Connection connection;

@@ -30,7 +30,7 @@ public class ProfessorAdicionarController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String nome = request.getParameter("nome");
-        if (!nome.isEmpty()) {
+        if (nome != null) {
             Professor professor = new Professor(nome);
             ProfessorDAO dao = new ProfessorDAO();
             dao.inserir(professor);
@@ -40,10 +40,5 @@ public class ProfessorAdicionarController extends HttpServlet {
             doGet(request, response);
         }
     }
-
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
 }

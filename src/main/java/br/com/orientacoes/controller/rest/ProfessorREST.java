@@ -26,13 +26,9 @@ public class ProfessorREST extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
-        if (false) {
-            response.getWriter().write(gson.toJson(new Erro("É necessário estar autenticado para ter acesso")));
-        } else {
-            ProfessorDAO dao = new ProfessorDAO();
-            String json = gson.toJson(dao.listar());
-            response.getWriter().write(json);
-        }
+        ProfessorDAO dao = new ProfessorDAO();
+        String json = gson.toJson(dao.listar());
+        response.getWriter().write(json);
     }
 
     @Override
@@ -40,19 +36,15 @@ public class ProfessorREST extends HttpServlet {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
 
-        if (request.getSession().getAttribute("usuario") == null) {
-            response.getWriter().write(gson.toJson(new Erro("É necessário estar autenticado para ter acesso")));
-        } else {
-            String nome = request.getParameter("nome");
+        String nome = request.getParameter("nome");
 
-            if (nome != null) {
-                Professor professor = new Professor(nome);
-                ProfessorDAO dao = new ProfessorDAO();
-                dao.inserir(professor);
-                response.getWriter().write(gson.toJson(new Sucesso("Professor inserido com sucesso!")));
-            } else {
-                response.getWriter().write(gson.toJson(new Erro("O atributo 'nome' é obrigatório")));
-            }
+        if (nome != null) {
+            Professor professor = new Professor(nome);
+            ProfessorDAO dao = new ProfessorDAO();
+            dao.inserir(professor);
+            response.getWriter().write(gson.toJson(new Sucesso("Professor inserido com sucesso!")));
+        } else {
+            response.getWriter().write(gson.toJson(new Erro("O atributo 'nome' é obrigatório")));
         }
     }
 
@@ -60,18 +52,14 @@ public class ProfessorREST extends HttpServlet {
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-
-        if (false) {
-            response.getWriter().write(gson.toJson(new Erro("É necessário estar autenticado para ter acesso")));
-        } else {
-            ProfessorDAO dao = new ProfessorDAO();
-            if (request.getParameter("id_professor") != null) {
-                int id = Integer.parseInt(request.getParameter("id_professor"));
-                if (dao.deletar(id)) {
-                    response.getWriter().write(gson.toJson(new Sucesso("Professor excluido com sucesso!")));
-                } else {
-                    response.getWriter().write(gson.toJson(new Erro("Não foi possível excluir este professor, pois ele tem orientações!")));
-                }
+        
+        ProfessorDAO dao = new ProfessorDAO();
+        if (request.getParameter("id_professor") != null) {
+            int id = Integer.parseInt(request.getParameter("id_professor"));
+            if (dao.deletar(id)) {
+                response.getWriter().write(gson.toJson(new Sucesso("Professor excluido com sucesso!")));
+            } else {
+                response.getWriter().write(gson.toJson(new Erro("Não foi possível excluir este professor, pois ele tem orientações!")));
             }
         }
     }

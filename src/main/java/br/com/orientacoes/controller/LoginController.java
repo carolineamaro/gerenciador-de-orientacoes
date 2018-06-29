@@ -45,8 +45,6 @@ public class LoginController extends HttpServlet {
             }else{
                 request.setAttribute("erro", "Seu e-mail ou senha são incorretos, tente novamente!");
             }
-        }else{
-            request.setAttribute("erro", "Seu e-mail ou senha não foram enviados corretamente!");
         }
         
         doGet(request, response);

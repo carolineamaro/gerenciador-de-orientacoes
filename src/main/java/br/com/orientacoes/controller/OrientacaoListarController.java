@@ -19,15 +19,15 @@ public class OrientacaoListarController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         OrientacaoDAO dao = new OrientacaoDAO();
-        request.setAttribute("orientacoes", dao.listar());
-
+       
         if (request.getParameter("deletar") != null) {
             int id = Integer.parseInt(request.getParameter("deletar"));
             dao.deletar(id);
             response.sendRedirect("orientacao?excluido=true");
             return;
         }
-
+        
+        request.setAttribute("orientacoes", dao.listar());
         request.getRequestDispatcher("todos-orientacao.jsp").forward(request, response);
     }
 }
